@@ -74,5 +74,9 @@ public class FlappyBird implements ActionListener, KeyListener {
 	public int getYPos() {
 		return yPos;
 	}
+
+	public BufferedImage getCurrentImage() {
+		return currentImage;
+	}
 	
 }

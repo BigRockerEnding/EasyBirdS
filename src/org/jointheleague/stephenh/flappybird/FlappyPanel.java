@@ -95,7 +95,7 @@ public class FlappyPanel extends JPanel implements Runnable, ActionListener {
 			} else {
 				System.exit(0);
 			}
-		} else if (myBird.getYPos() < 0) {
+		} else if (myBird.getYPos() < 0 - myBird.getCurrentImage().getHeight()) {
 			flappyTick.stop();
 			JOptionPane.showMessageDialog(this, "Oops! That is too high!\nYour Score: " + flappyScore);
 			int restart = JOptionPane.showConfirmDialog(this, "Would you like to play again?", "Replay?", JOptionPane.YES_NO_OPTION);
