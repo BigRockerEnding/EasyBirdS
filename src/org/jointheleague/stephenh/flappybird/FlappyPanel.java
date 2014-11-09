@@ -29,6 +29,7 @@ public class FlappyPanel extends JPanel implements Runnable, ActionListener {
 	private Timer flappyTick;
 	private static int flappyScore;
 	private final Font scoreFont = new Font("Helvetica", Font.BOLD, 24);
+	private boolean speedUpHandled = true;
 	
 	public static void main(String[] args) {
 		new FlappyPanel().run();
@@ -69,6 +70,15 @@ public class FlappyPanel extends JPanel implements Runnable, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		repaint();
 		collisionTest();
+		if (flappyScore % 10 == 0) {
+			if (speedUpHandled == true) { return;
+			} else {
+				speedUpHandled = true;
+				flappyTick.setDelay(flappyTick.getDelay() - 4);
+			}
+		} else {
+			speedUpHandled = false;
+		}
 	}
 	
 	private void collisionTest() {
@@ -85,6 +95,15 @@ public class FlappyPanel extends JPanel implements Runnable, ActionListener {
 			} else {
 				System.exit(0);
 			}
+		} else if (myBird.getYPos() < 0) {
+			flappyTick.stop();
+			JOptionPane.showMessageDialog(this, "Oops! That is too high!\nYour Score: " + flappyScore);
+			int restart = JOptionPane.showConfirmDialog(this, "Would you like to play again?", "Replay?", JOptionPane.YES_NO_OPTION);
+			if (restart == JOptionPane.YES_OPTION) {
+				reset();
+			} else {
+				System.exit(0);
+			}
 		}
 	}
 
@@ -92,6 +111,7 @@ public class FlappyPanel extends JPanel implements Runnable, ActionListener {
 		myBird.reset();
 		pipe.reset(0);
 		pipe2.reset(PANEL_WIDTH / 2);
+		flappyTick.setDelay(40);
 		flappyTick.start();
 		flappyScore = 0;
 		repaint();
