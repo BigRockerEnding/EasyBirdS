@@ -63,6 +63,7 @@ public class FlappyPanel extends JPanel implements Runnable, ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
+		JOptionPane.showMessageDialog(this, "Get Ready to Play. \n Press Space to Hop.");
 		flappyTick.start();
 	}
 
